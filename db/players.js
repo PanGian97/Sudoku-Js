@@ -8,6 +8,10 @@ function getPlayerByUsername(username){
 return knex("players").where("username",username);
 };
 
+function updatePlayerScore(player_id){
+knex("players").where("id",player_id).update({score: player_score});
+};
+
 function insertPlayer(player){
     knex("players")
     .select("username")

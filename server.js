@@ -10,7 +10,7 @@ app.use(express.urlencoded({extended:false}));
 app.set('views','./views')
 app.set('view engine','ejs')
 //some variables
-let logged_player_username;
+let logged_player_username="";
 
 
 app.get("/intro",(req,res)=>{
@@ -30,17 +30,16 @@ app.post("/",async (req,res)=>{
  
 });
 app.get("/",async (req,res)=>{
-    const all_players = await db.getAllPlayers();
-    const player = await db.getPlayerByUsername("papago");
-    res.status(200).render('index.ejs');
+    
+    const all_players = await db.getAllPlayers();//could be singleton to not be loaded all the time on refresh
+    const player = await db.getPlayerByUsername(logged_player_username);
+    res.status(200).render('index.ejs',{ player : player[0],players :all_players});
 
     console.log("player : "+all_players[0].username+"score: "+all_players[0].score);
     console.log("Welcome "+player[0].username);
 });
 
-app.post("/intro",(req,res)=>{
-   
-});
+
 
 app.listen(1337,()=> console.log("server listens to 1337port"));
 
