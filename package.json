@@ -1,0 +1,29 @@
+{
+  "name": "sudokujs",
+  "version": "1.0.0",
+  "description": "sudoku game",
+  "main": "intro.ejs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "author": "pangian",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "knex": "^0.95.11",
+    "nodemon": "^2.0.12",
+    "sqlite3": "^5.0.2"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PanGian97/sudokujs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/PanGian97/sudokujs/issues"
+  },
+  "homepage": "https://github.com/PanGian97/sudokujs#readme"
+}

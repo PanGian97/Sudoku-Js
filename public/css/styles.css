@@ -1,0 +1,81 @@
+header{
+    text-align: center;
+    padding-bottom: 10px;
+    border-bottom:3px solid blue;
+}
+
+#setup-game *{ 
+     /* all the children of setup-game */
+  margin-bottom: 20px;
+  
+  align-items: center;
+}
+
+button{
+    justify-self:center;   
+}
+#game{
+    left: 50%;
+    top: 65%;
+    position: absolute;
+transform: translate(-50%, -50%);
+ 
+  
+}
+
+#board{
+    padding-top: 10px;
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    align-content:flex-start;
+    width: 600px;
+    height:600px;
+ 
+}
+#msg_board{display: none;}
+
+ 
+.tile{
+    border:1px solid black;
+    width: 65px;
+    height: 65px;
+    text-align: center;
+    margin:0px;
+    vertical-align: middle;
+    font-size:40px;
+}
+
+
+.selected{
+    background-color: yellow;
+}
+.unselected{
+    
+    background-color: white;
+}
+
+.false{
+    background-color: red;
+}
+.right{
+    background-color: yellowgreen;
+}
+.rightBorder{
+border-right:4px solid black;
+}
+.bottomBorder{
+    border-bottom:4px solid black;
+    
+    }
+footer{
+    background-color: rgb(133, 133, 133);
+    text-align: center;
+}
+.player_container{
+    display: flex;
+    justify-content: center;
+}
+h1{
+    text-align: center;
+}
