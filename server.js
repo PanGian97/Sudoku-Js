@@ -1,6 +1,7 @@
 const express= require("express");
 const app = express();
 const db = require("./db/players");
+const validator = require("./validators");
 app.use('/public',express.static('public'))
 app.use('/css',express.static(__dirname + '/public/css'));
 app.use('/js',express.static(__dirname + '/public/js'));
@@ -10,33 +11,52 @@ app.use(express.urlencoded({extended:false}));
 app.set('views','./views')
 app.set('view engine','ejs')
 //some variables
-let logged_player_username="";
+let logged_player;
 
 
 app.get("/intro",(req,res)=>{
     res.render('intro.ejs')
 });
 app.post("/",async (req,res)=>{
-    try{
-        console.log("player to be added: "+req.body.username);
-        const db_player = await db.insertPlayer(req.body);
-        logged_player_username = req.body.username;
-        res.redirect("/");
-    }catch{
-        res.redirect("/intro")
-        console.log("something went wrong");
-    }
+    
+        console.log("player to be processed: "+req.body.username);
+         const existingPlayer = await db.getPlayerByUsername(req.body.username);//returns a player object or null
+        
+        if(existingPlayer[0]!==undefined)//if username exists
+        {
+            console.log(existingPlayer[0].password);
+           if( await validator.isAuthPasswordValid(req.body.password,existingPlayer[0].password))
+           {
+               console.log("Welcome back!!!!!");
+               console.log("Entered password:"+req.body.password);
+               logged_player= existingPlayer[0];
+               res.redirect("/");
+           }
+           else {res.redirect("/intro")
+           console.log("wrong password for the coresponding player");
+           }
+        }
+        else{
+        console.log("creating new player...");
+        const hashed_player_password =  validator.cryptPassword(req.body.password);
+        logged_player ={username: req.body.username,password:hashed_player_password,score: 0}; 
+        db.signUpPlayer(logged_player);
+        console.log("PLAYER US"+logged_player.username);
+        res.redirect("/")
+       }    
+        
+    
    
  
 });
 app.get("/",async (req,res)=>{
     
     const all_players = await db.getAllPlayers();//could be singleton to not be loaded all the time on refresh
-    const player = await db.getPlayerByUsername(logged_player_username);
-    res.status(200).render('index.ejs',{ player : player[0],players :all_players});
+    const player = await db.getPlayerByUsername(logged_player.username);
+    res.status(200).render('index.ejs',{ player : player[0]});
 
     console.log("player : "+all_players[0].username+"score: "+all_players[0].score);
-    console.log("Welcome "+player[0].username);
+  console.log("Welcome "+player[0].username);
 });
 
 
