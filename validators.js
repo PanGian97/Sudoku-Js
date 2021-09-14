@@ -7,8 +7,9 @@ function isPasswordValid(password){
 }
 function isUsernameValid(username){
     if(username.length>5){
+        
       return true;
-    }else{return false;}
+    }else{  return false;}
 }
 function cryptPassword(password){
     return bcrypt.hashSync(password, 10);

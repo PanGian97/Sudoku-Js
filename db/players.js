@@ -14,15 +14,15 @@ knex("players").where("id",player_id).update({score: player_score});
 
 
 function signUpPlayer(player){
-    knex("players")
-    .where("username", player.username)
+    return knex("players")
         .insert([{
           username: player.username,
           password: player.password,
           score: 0 
         }]).then( function (result) {
-        
-       })
+          console.log("inserted");
+            
+        })
         };
 
 

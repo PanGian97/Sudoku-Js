@@ -38,11 +38,22 @@ app.post("/",async (req,res)=>{
         }
         else{
         console.log("creating new player...");
-        const hashed_player_password =  validator.cryptPassword(req.body.password);
-        logged_player ={username: req.body.username,password:hashed_player_password,score: 0}; 
-        db.signUpPlayer(logged_player);
-        console.log("PLAYER US"+logged_player.username);
-        res.redirect("/")
+        if(validator.isUsernameValid(req.body.username))
+        {
+           const hashed_player_password =  validator.cryptPassword(req.body.password);
+           logged_player ={username: req.body.username,password:hashed_player_password,score: 0}; 
+           if(db.signUpPlayer(logged_player))
+           {
+            
+           console.log("PLAYER US"+logged_player.username);
+           res.redirect("/")
+           }
+           else{console.log("Failed to insert player: "+logged_player.username);
+           res.redirect("/intro");}
+        } else{
+            console.log("Form has to fulfill the requirments");
+            res.redirect("/intro");
+        }
        }    
         
     
