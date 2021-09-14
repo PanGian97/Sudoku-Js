@@ -60,10 +60,17 @@ app.post("/",async (req,res)=>{
    
  
 });
+app.post("/refresh",async(req,res)=>{
+    logged_player.score = await db.updatePlayerScore(logged_player.id,logged_player.score+1);//raise player's score to db and return back the submitted score
+    res.redirect("/");
+});
+
+
 app.get("/",async (req,res)=>{
     
     const all_players = await db.getAllPlayers();//could be singleton to not be loaded all the time on refresh
     const player = await db.getPlayerByUsername(logged_player.username);
+    console.log(logged_player.username+"usernameeeee")
     res.status(200).render('index.ejs',{ player : player[0]});
 
     console.log("player : "+all_players[0].username+"score: "+all_players[0].score);

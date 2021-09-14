@@ -19,7 +19,7 @@ let difficulty;
 let resultsMode = false;
 let boardResults;
 let allowedDigits = /^[0-9]$/;
-
+let isSolved=false;
 
 
 function startGame(){
@@ -118,6 +118,7 @@ function selectTile(tile){
 }
 
 function checkResults(){
+  console.log("CHECKING SUDOKU...");
   resultsMode = !resultsMode;
   let tiles = document.querySelectorAll(".tile");
   if(resultsMode==true)
@@ -151,11 +152,19 @@ if(tiles.length == rightTiles.length){//he won
 rightTiles[i].readOnly=true;//make all tiles non-editable;
 document.getElementById("msg_board").style.display="inline";//win msg display
 }
-
+console.log("SUDOKU SOLVED");  
+isSolved=true;
+}
+else{
+  console.log("SUDOKU NOT SOLVED");
+  isSolved=false;
+}
 }
 
+function submitResults(){
+  if (isSolved) return true;
+  return false;
 }
-
 function hideWinMsg(){
   document.getElementById("msg_board").style.display="none";
 }
