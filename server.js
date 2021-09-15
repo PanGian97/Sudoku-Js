@@ -60,7 +60,8 @@ app.post("/",async (req,res)=>{
  
 });
 app.post("/refresh",async(req,res)=>{
-    logged_player.score = await db.updatePlayerScore(logged_player.id,logged_player.score+1);//raise player's score to db and return back the submitted score
+    console.log('scoreeeee: '+req.body.difficulty);
+    logged_player.score = await db.updatePlayerScore(logged_player.id,logged_player.score+parseInt(req.body.difficulty));//raise player's score to db and return back the submitted score
     res.redirect("/");
 });
 

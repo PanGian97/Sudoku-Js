@@ -15,7 +15,7 @@ const hard = [
 
 let selectedNum;
 let selectedTileId = 0;
-let difficulty;
+let difficulty=0;
 let resultsMode = false;
 let boardResults;
 let allowedDigits = /^[0-9]$/;
@@ -165,6 +165,8 @@ else{
 }
 
 function submitResults(){
+  let di = document.getElementById("difficulty").value = difficulty//fill the hidden input with the difficulty value to be added to player in db
+  console.log(di);
   if (isSolved) return true;
 
   return false;

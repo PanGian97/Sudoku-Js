@@ -9,7 +9,7 @@
     <header class= game-options>
         <h1>Sudoku</h1>
         <div id="setup-game">
-        <div id="difficulty">
+        <div id="difficulty_selection">
           
         <h3>Choose difficulty</h3>
         <input id="d1" type="radio" name="difficulty" value="easy" checked="easy">
@@ -31,6 +31,7 @@
       <div id= game>
         <body>   
           <form action="/refresh" method="POST" class="submit_score" onsubmit= "return submitResults();">
+            <input type="hidden" id="difficulty" name= "difficulty"value= ""  />
             <input type="submit" id="submit_btn" value="SUBMIT">
            
           </form>
