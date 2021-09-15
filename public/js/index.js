@@ -89,7 +89,7 @@ function generateBoard(board){
 
 function clearBoard(){
   hideWinMsg();//hide win mdg
-  
+  isSolved=false;
     let tiles = document.querySelectorAll(".tile");
     for(let i=0; i<tiles.length;i++){
       tiles[i].parentNode.removeChild(tiles[i]); //deletes p elements (tiles)
@@ -97,6 +97,7 @@ function clearBoard(){
 }
 function resetBoard(){
   hideWinMsg();
+  isSolved=false;
   let tiles = document.querySelectorAll(".tile");
   for(let i=0; i<tiles.length;i++){
 
@@ -139,6 +140,7 @@ function checkResults(){
   }
 }else{
   console.log("results=false");
+  hideWinMsg();
   for (let i=0; i<tiles.length;i++){
     tiles[i].classList.replace("false","unselected");
     tiles[i].classList.replace("right","unselected");
@@ -150,7 +152,7 @@ if(tiles.length == rightTiles.length){//he won
 
   for(let i=0;i<rightTiles.length;i++){
 rightTiles[i].readOnly=true;//make all tiles non-editable;
-document.getElementById("msg_board").style.display="inline";//win msg display
+document.getElementById("win_msg").style.display="inline";//win msg display
 }
 console.log("SUDOKU SOLVED");  
 isSolved=true;
@@ -158,16 +160,19 @@ isSolved=true;
 else{
   console.log("SUDOKU NOT SOLVED");
   isSolved=false;
+ 
 }
 }
 
 function submitResults(){
   if (isSolved) return true;
+
   return false;
 }
 function hideWinMsg(){
-  document.getElementById("msg_board").style.display="none";
+  document.getElementById("win_msg").style.display="none";
 }
+
 
 
 

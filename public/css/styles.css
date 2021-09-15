@@ -15,27 +15,43 @@ button{
     justify-self:center;   
 }
 #game{
+  
+}
+
+
+#board{
+    border:royalblue;
     left: 50%;
     top: 65%;
     position: absolute;
 transform: translate(-50%, -50%);
- 
-  
-}
-
-#board{
-    padding-top: 10px;
-    margin-top: 10px;
-    display: flex;
-    flex-wrap: wrap;
-    align-content:flex-start;
     width: 600px;
     height:600px;
  
 }
-#msg_board{display: none;}
-
- 
+#win_msg{display: none;}
+#submit_btn{
+    background-color: #021403;
+    border: none;
+    color: rgb(184, 185, 187);
+    padding: 15px 32px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+ .header_btn{
+    background-color: royalblue;
+    border: none;
+    color: rgb(184, 185, 187);
+    padding: 15px 32px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+ }
 .tile{
     border:1px solid black;
     width: 65px;
@@ -74,7 +90,15 @@ footer{
 }
 .player_container{
     display: flex;
+    align-items: center;
+    flex-direction: column;
     justify-content: center;
+}
+.warning_msg{
+    color:red;
+}
+.submit_score{
+    align-items: center;
 }
 h1{
     text-align: center;
